@@ -13,7 +13,6 @@ const firebaseConfig = {
   appId: "1:391332858731:web:87e6db3899ff980cf3da2e",
   measurementId: "G-6GDXG5HYEQ",
 };
-
 // Firebaseアプリオブジェクトを初期化
 const app = initializeApp(firebaseConfig);
 // Firestoreを読み込み、db(databaseの略)として export

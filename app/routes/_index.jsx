@@ -1,12 +1,5 @@
 import { Link } from "@remix-run/react";
 
-export const meta = () => {
-  return [
-    { title: "New Remix SPA" },
-    { name: "description", content: "Welcome to Remix (SPA Mode)!" },
-  ];
-};
-
 export default function Index() {
   return (
     <div className="index-page">
