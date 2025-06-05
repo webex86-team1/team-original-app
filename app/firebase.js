@@ -1,6 +1,7 @@
 // 必要な関数を import
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -17,4 +18,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 // Firestoreを読み込み、db(databaseの略)として export
 const db = getFirestore(app);
-export { db };
+const auth = getAuth(app);
+
+export { db, auth, GoogleAuthProvider, signInWithPopup };
