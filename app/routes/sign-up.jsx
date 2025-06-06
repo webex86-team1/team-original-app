@@ -1,3 +1,4 @@
+import "../styles/auth/sign-up.css";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
@@ -21,7 +22,9 @@ export default function SignUp() {
 
   return (
     <div className="sign-up-page">
-      <h1>Hi,はじめまして？</h1>
+      <h1>タイトル</h1>
+      <h2>Hi,はじめまして？</h2>
+      <img src="../public/eggTrip.png" alt="eggTrip"></img>
 
       <div className="sign-up-form">
         <form onSubmit={handleSubmit}>
