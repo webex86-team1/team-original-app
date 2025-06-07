@@ -1,4 +1,6 @@
 import Header from "../components/header.jsx";
+import { Link } from "@remix-run/react";
+
 
 export const meta = () => {
   return [
@@ -11,8 +13,14 @@ export default function Index() {
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
       <Header />
+      
       <h1>Welcome to Remix (SPA Mode)</h1>
       <ul>
+        <li>
+        <Link to="/baedo" className="navigation__link">
+            映え度判定アプリへ
+          </Link>
+        </li>
         <li>
           <a
             target="_blank"
