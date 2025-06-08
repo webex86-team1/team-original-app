@@ -10,12 +10,15 @@
     "start": "vite preview"
   },
   "dependencies": {
+    "@react-google-maps/api": "^2.20.6",
     "@remix-run/node": "2.16.6",
     "@remix-run/react": "2.16.6",
     "@remix-run/serve": "2.16.6",
     "firebase": "^11.8.1",
+    "leaflet": "^1.9.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-leaflet": "^4.2.1",
     "react-router-dom": "^7.6.2"
   },
   "devDependencies": {
