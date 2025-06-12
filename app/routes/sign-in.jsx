@@ -13,7 +13,7 @@ export default function SignUp() {
     try {
       await signInWithPopup(auth, provider);
       alert("ログインに成功しました");
-      navigate("/home");
+      navigate("/gamen");
     } catch (error) {
       alert("ログインに失敗しました");
       console.log(error.message);
