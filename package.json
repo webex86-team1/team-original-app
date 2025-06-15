@@ -14,11 +14,14 @@
     "@remix-run/node": "2.16.6",
     "@remix-run/react": "2.16.6",
     "@remix-run/serve": "2.16.6",
-    "firebase": "^11.8.1",
-    "leaflet": "^1.9.4",
+    "@vis.gl/react-google-maps": "^1.5.3",
+    "bootstrap": "^5.3.6",
+    "date-fns": "^4.1.0",
+    "firebase": "^11.9.0",
     "react": "^18.3.1",
+    "react-bootstrap": "^2.10.10",
     "react-dom": "^18.3.1",
-    "react-leaflet": "^4.2.1",
+    "react-icon": "^1.0.0",
     "react-router-dom": "^7.6.2"
   },
   "devDependencies": {
