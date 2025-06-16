@@ -1,0 +1,20 @@
+{
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "deploy": "firebase deploy --only functions",
+    "lint": "echo 'no lint script defined' && exit 0"
+  },
+  "engines": {
+    "node": "22"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "@google/generative-ai": "^0.5.0",
+    "firebase-admin": "^12.6.0",
+    "firebase-functions": "^6.3.2",
+    "mime-types": "^3.0.1"
+  },
+  "private": true
+}
