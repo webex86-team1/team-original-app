@@ -1,73 +1,96 @@
-// const functions = require("firebase-functions");
-const { defineSecret } = require("firebase-functions/params");
-const { onInit } = require("firebase-functions/v2/core");
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-const { onRequest } = require("firebase-functions/v2/https");
-const { getStorage } = require("firebase-admin/storage");
+ // const functions = require("firebase-functions");
+ const { defineSecret } = require("firebase-functions/params");
+ const { onInit } = require("firebase-functions/v2/core");
+ const { GoogleGenerativeAI } = require("@google/generative-ai");
+ const { onRequest } = require("firebase-functions/v2/https");
+ const { getStorage } = require("firebase-admin/storage");
+ // CORSエラー解消のためを明示的に記述
+ const cors = require("cors")({origin: true});
+ 
+ // const apiKey = functions.config().gemini.key;
+ const apiKey = defineSecret("GOOGLE_API_KEY");
+ let genAI;
+ 
+ onInit(() => {
+   genAI = new GoogleGenerativeAI(apiKey.value());
+ });
+ 
+ exports.baedoscore = onRequest(
+   {
+     secrets: [apiKey],
+   },
+   (req, res) => {
+     cors(req,res,async()=>{
+     try {
+       // POSTメソッドの時body
+       const imageUrl = req.body.imageUrl;
+ 
+       if (!imageUrl) {
+         return res.status(400).send("画像URLがないよ。");
+       }
+ 
+       const response = await fetch(imageUrl);
+       // 下記追加するとエラーになる。
+       // console.log("fetch status:", response.status);
+ 
+       const imageArrayBuffer = await response.arrayBuffer();
+       const base64ImageData = Buffer.from(imageArrayBuffer).toString("base64");
+ 
+       const model = genAI.getGenerativeModel({
+         model: "gemini-1.5-pro",
+       });
+ 
+       const promptText = `
+       あなたはSNS映え画像の判定AIです。
 
-// const apiKey = functions.config().gemini.key;
-const apiKey = defineSecret("GOOGLE_API_KEY");
-let genAI;
+以下の基準に従って、画像を100点満点で採点してください。
 
-onInit(() => {
-  genAI = new GoogleGenerativeAI(apiKey.value());
-});
+【特別加点項目】
+・画像に「ちいかわ」またはそれに似たキャラクター（丸くて小さくてかわいい動物キャラなど）が映っている → 100点を即座に与える（他の項目は無視してよい）
 
-exports.scoreImage = onRequest(
-  {
-    secrets: [apiKey],
-  },
-  async (req, res) => {
-    try {
-      const imageUrl = req.query.imageUrl;
+【加点項目】
+・色が鮮やかで明るい → +20点
+・独創性やユニークさがある → +20点
+・背景が整理されていて見やすい → +15点
+・美味しいたべものやかわいい動物や綺麗な風景 → +15点
+・空間に余白があってスッキリしている → +5点
+・人物の笑顔 → +5点
+・空・海・花など自然がきれいに写っている → +15点
 
-      if (!imageUrl) {
-        return res.status(400).send("画像URLがないよ。");
-      }
-      
-      const response = await fetch(imageUrl);
-      // 下記追加するとエラーになる。
-      // console.log("fetch status:", response.status);
+【減点項目】
+・暗すぎる、色がくすんでいる → -20点
+・ピンボケや手ブレがある → -20点
+・背景がごちゃごちゃしている、散らかっている → -15点
+・構図が不自然、傾いている → -15点
+・映ってはいけないもの（ゴミなど）が含まれている → -40点
+・無表情 → -10点
+・強すぎるフラッシュで白飛びしている → -10点
 
-      const imageArrayBuffer = await response.arrayBuffer();
-      const base64ImageData = Buffer.from(imageArrayBuffer).toString("base64");
+※最終スコアは0点〜100点の範囲で調整してください。
+※説明や理由は不要です。
+※**数字だけ（例: 100）**を出力してください。
+`;
 
-      const model = genAI.getGenerativeModel({
-        model: "gemini-1.5-pro",
-      });
-
-      const promptText = `
-      次の条件に従い、与えられた画像に含まれる内容を判定して点数を計算し、数字だけを返してください。
-      ① 丸いものが写っている → ＋50点
-      ② 四角いものが写っている → ＋0点
-      ③ 三角形が写っている → ＋10点
-      ④ 白色が写っている → ＋50点
-      ⑤ 青色が写っている → ＋20点
-      ⑥ 黄色が写っている → ＋15点
-      ⑦ 緑色が写っている → ＋5点
-      ※ 上記のどれにも当てはまらない場合は0点を返してください。
-      返すのは点数の数字のみで、説明やコメントは不要です。
-      `;
-
-      const result = await model.generateContent([
-        {
-          inlineData: {
-            mimeType: "image/jpeg",
-            data: base64ImageData,
-          },
-        },
-        {
-          text: promptText,
-        }
-      ]);
-
-      const text = result.response.text();
-      const score = text.match(/\d+/)?.[0] || "0";
-      console.log("スコア:", text);
-      return res.status(200).send(score);
-    } catch (error) {
-      console.error("Error in scoreImage:", error);
-      return res.status(500).send("Internal Server Error");
-    }
-  }
-);
+       const result = await model.generateContent([
+         {
+           inlineData: {
+             mimeType: "image/jpeg",
+             data: base64ImageData,
+           },
+         },
+         {
+           text: promptText,
+         },
+       ]);
+ 
+       const text = result.response.text();
+       const score = text.match(/\d+/)?.[0] || "0";
+       console.log("スコア:", text);
+       return res.status(200).send(score);
+     } catch (error) {
+       console.error("Error in scoreImage:", error);
+       return res.status(500).send("Internal Server Error");
+     }
+   });
+   }
+ );

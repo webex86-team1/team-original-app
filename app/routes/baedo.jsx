@@ -34,8 +34,7 @@ export default function Baedo() {
 
       console.log("アップロード成功！URL:", downloadURL);
 
-      // Firebase Functions へPOST → AI Studio APIへ中継される
-      const response = await fetch("https://scoreimage-z2oiicc62q-uc.a.run.app", {
+      const response = await fetch("https://baedoscore-z2oiicc62q-uc.a.run.app", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -56,7 +55,7 @@ export default function Baedo() {
   };
 
   if (submitted && resultData) {
-    return <Baedoresult imageUrl={previewUrl} score={resultData.score} comment={resultData.comment} />;
+    return <Baedoresult imageUrl={previewUrl} score={resultData}/>;
   }
 
   return (
