@@ -1,10 +1,11 @@
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
+// import { useNavigate } from "react-router-dom";
+// import Header from "../components/header";
 import {
   APIProvider,
   Map,
   AdvancedMarker,
   InfoWindow,
-  useMapsLibrary,
 } from "@vis.gl/react-google-maps";
 
 import { db } from "../firebase";
@@ -18,21 +19,17 @@ import {
 
 //住所と地図の中心の初期設定
 function Home() {
-  //geocodingLib が変わった時（＝計算結果が変わった時）にだけ、Geocoderインスタンスを再生成する
-  const geocodingLib = useMapsLibrary("geocoding");
-  useMemo(() => geocodingLib && new geocodingLib.Geocoder(), [geocodingLib]);
-  // const [address, setAddress] = useState("");
   const [center, setCenter] = useState({
     lat: 35.681236,
     lng: 139.767125,
   });
 
   const defaultZoom = 15;
+  const [address, setAddress] = useState("");
   //クリックされた地点のリスト
   const [clickPoints, setClickPoints] = useState([]);
   //クリックしたマーカー
   const [selectedMarker, setSelectedMarker] = useState(null);
-
   const mapRef = useRef(null);
   //画面表示後、Firestoreに保存されたマーカーを表示する非同期処理
   useEffect(() => {
@@ -40,7 +37,6 @@ function Home() {
       const querySnapShot = await getDocs(collection(db, "markers"));
       const markers = querySnapShot.docs.map((doc) => ({
         id: doc.id,
-        // name: doc.data().name,
         location: doc.data().location,
       }));
       setClickPoints(markers);
@@ -48,22 +44,36 @@ function Home() {
     fetchMarkers();
   }, []);
 
-  // //geocodeを使った、地名や住所からの緯度経度の取得
-  // const handleGeocode = () => {
-  //   if (!address || !geocoder) return;
-  //   geocoder.geocode({ address }, (result, status) => {
-  //     if (status === "OK") {
-  //       const location = result[0].geometry.location;
+  const handleGeocode = () => {
+    console.log("address:", address);
+    if (!address) {
+      alert("住所を入力してください。");
+      return;
+    }
+    if (!window.google || !window.google.maps) {
+      alert("Google Maps APIがまだロードされていません。");
+      return;
+    }
 
-  //       setCenter({
-  //         lat: location.lat(),
-  //         lng: location.lng(),
-  //       });
-  //     } else {
-  //       alert("位置情報を取得できませんでした");
-  //     }
-  //   });
-  // };
+    const geocoder = new window.google.maps.Geocoder();
+
+    geocoder.geocode({ address }, (results, status) => {
+      console.log("geocode結果", results, status);
+      if (status === "OK" && results[0]) {
+        const location = results[0].geometry.location;
+        const lat = location.lat();
+        const lng = location.lng();
+        setCenter({ lat, lng });
+        if (mapRef.current) {
+          mapRef.current.panTo({ lat, lng });
+          mapRef.current.setZoom(defaultZoom);
+          console.log("地図を移動しました。");
+        }
+      } else {
+        alert("住所が見つかりませんでした。");
+      }
+    });
+  };
 
   //Mapクリック→中心が更新されマーカーが追加される
   const handleMapClick = async (e) => {
@@ -73,7 +83,6 @@ function Home() {
 
     // クリックした地点のオブジェクト作成
     const newPoint = {
-      // name: address || "Unnamed",
       location: { lat, lng },
     };
     // markersという名前でnewPointの情報をfirebaseに保存する(FirestoreによってIDは自動的に生成される)
@@ -107,28 +116,18 @@ function Home() {
   return (
     <APIProvider
       apiKey={"AIzaSyBBvIY4EhTo4X1Kcw4meN-S33PZfhxTn40"}
+      libraries={["places"]}
       onLoad={() => console.log("Maps API has loaded")}
     >
+      {/* <Header /> */}
       <h1>フェレットラベル</h1>
-
-      {/* 入力フォーム
       <input
         type="text"
         placeholder="地名を入力(例：東京駅)"
         value={address}
         onChange={(e) => setAddress(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            if (!geocoder) {
-              alert(
-                "現在地図ライブラリを読み込み中です。少し待ってから再試行してください。"
-              );
-              return;
-            }
-            handleGeocode();
-          }
-        }} */}
-      {/* /> */}
+      />
+      <button onClick={handleGeocode}>検索</button>
       <Map
         style={{ height: "70vh", width: "80%" }}
         defaultZoom={defaultZoom}

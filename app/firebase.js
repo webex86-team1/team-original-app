@@ -6,7 +6,7 @@ import { getStorage } from "firebase/storage";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBBvIY4EhTo4X1Kcw4meN-S33PZfhxTn40",
+  apiKey: "AIzaSyC1Jk4rHK5lvInx4xUexyQ-Mm041PBvqfY",
   authDomain: "ferrettrio-team-original-app.firebaseapp.com",
   projectId: "ferrettrio-team-original-app",
   storageBucket: "ferrettrio-team-original-app.firebasestorage.app",
