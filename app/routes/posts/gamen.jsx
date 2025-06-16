@@ -1,5 +1,6 @@
+
 import { useEffect, useState } from "react";
-import { db, storage } from "../firebase";
+import { db, storage } from "../../firebase";
 import {
   collection,
   getDocs,
@@ -8,8 +9,6 @@ import {
 } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { format } from "date-fns";
-import Header from "../components/header.jsx";
-import "../styles/auth/gamen.css";
 
 export default function PostList() {
   const [post, setPosts] = useState([]);
@@ -31,7 +30,7 @@ export default function PostList() {
     const photoURL = await getDownloadURL(photoRef);
     console.log("const photoURL = await getDownloadURL(photoRef);");
     const date = new Date();
-    const formattedDate = format(date,"yyyy/MM/dd")
+    const formattedDate = format(date, "yyyy/MM/dd");
 
     await addDoc(collection(db, "ferret-database"), {
       title,
@@ -50,6 +49,14 @@ export default function PostList() {
     fetchPosts(); // 投稿リスト更新
   };
 
+  const handleDeletePost = async (id) => {
+    const confirmeddelete = window.confirm("本当に削除しますか？");
+    if (!confirmeddelete) return;
+
+    const newPosts = post.filter((post) => post.id !== id);
+    setPosts(newPosts);
+    alert("投稿が削除されました（Firestoreからの削除処理は別途必要）");
+  };
 
   const fetchPosts = async () => {
     const snapshot = await getDocs(collection(db, "ferret-database"));
@@ -63,9 +70,7 @@ export default function PostList() {
 
   return (
     <div>
-      <Header />
-      <h1></h1>
-      <h2>投稿する</h2>
+      <h2>旅行投稿フォーム</h2>
       <label>タイトル：</label>
       <input
         type="text"
@@ -104,6 +109,19 @@ export default function PostList() {
       />
       <br />
       <button onClick={handleAddPost}>投稿する</button>
+
+      <h2>投稿一覧</h2>
+      {post.map((post) => (
+        <div key={post.id}>
+          <h3>{post.title}</h3>
+          <p>満足度: {post.satisfaction} / 5</p>
+          <img src={post.photoURL} alt={post.title} width="200" />
+          <p>{post.mainText}</p>
+          <p>訪問時期: {post.visitDate}</p>
+          <p>投稿時間: {post.createdAt?.toDate().toLocaleString()}</p>
+          <button onClick={() => handleDeletePost(post.id)}>削除</button>
+        </div>
+      ))}
     </div>
   );
 }
