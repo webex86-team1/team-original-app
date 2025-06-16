@@ -24,7 +24,7 @@ export default function SignUp() {
     <div className="sign-up-page">
       <h1>タイトル</h1>
       <h2>Hi,はじめまして？</h2>
-      <img src="../public/eggTrip.png" alt="eggTrip"></img>
+      <img src="/eggTrip.png" alt="eggTrip"></img>
 
       <div className="sign-up-form">
         <form onSubmit={handleSubmit}>

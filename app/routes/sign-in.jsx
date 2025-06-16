@@ -4,7 +4,7 @@ import { auth } from "../firebase";
 import { Link, useNavigate } from "@remix-run/react";
 import { GoogleAuthProvider, signInWithPopup } from "../firebase";
 
-export default function SignUp() {
+export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ export default function SignUp() {
     try {
       await signInWithPopup(auth, provider);
       alert("ログインに成功しました");
-      navigate("/gamen");
+      navigate("/home");
     } catch (error) {
       alert("ログインに失敗しました");
       console.log(error.message);
@@ -35,7 +35,7 @@ export default function SignUp() {
     <div className="sign-up-page">
       <h1>タイトル</h1>
       <h2>Hi,おかえり～</h2>
-      <img src="../public/eggTrip.png" alt="eggTrip"></img>
+      <img src="/eggTrip.png" alt="eggTrip" />
 
       <div className="sign-up-form">
         <form onSubmit={handleSubmit}>
