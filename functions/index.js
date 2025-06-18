@@ -6,15 +6,15 @@
  const { getStorage } = require("firebase-admin/storage");
  // CORSエラー解消のためを明示的に記述
  const cors = require("cors")({origin: true});
- 
+
  // const apiKey = functions.config().gemini.key;
  const apiKey = defineSecret("GOOGLE_API_KEY");
  let genAI;
- 
+
  onInit(() => {
    genAI = new GoogleGenerativeAI(apiKey.value());
  });
- 
+
  exports.baedoscore = onRequest(
    {
      secrets: [apiKey],
@@ -24,22 +24,22 @@
      try {
        // POSTメソッドの時body
        const imageUrl = req.body.imageUrl;
- 
+
        if (!imageUrl) {
          return res.status(400).send("画像URLがないよ。");
        }
- 
+
        const response = await fetch(imageUrl);
        // 下記追加するとエラーになる。
        // console.log("fetch status:", response.status);
- 
+
        const imageArrayBuffer = await response.arrayBuffer();
        const base64ImageData = Buffer.from(imageArrayBuffer).toString("base64");
- 
+
        const model = genAI.getGenerativeModel({
          model: "gemini-1.5-pro",
        });
- 
+
        const promptText = `
        あなたはSNS映え画像の判定AIです。
 
@@ -82,7 +82,7 @@
            text: promptText,
          },
        ]);
- 
+
        const text = result.response.text();
        const score = text.match(/\d+/)?.[0] || "0";
        console.log("スコア:", text);

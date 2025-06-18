@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import Baedoresult from "../components/baedoresult";
 import { storage } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import "../styles/baedo.css";
 
 export default function Baedo() {
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [resultData, setResultData] = useState(""); // スコア＋コメント
@@ -59,18 +60,32 @@ export default function Baedo() {
   }
 
   return (
-    <div>
-      <h1>映え度判定</h1>
-      <p>写真を送信してね🌼</p>
-
-      <input type="file" accept="image/*" onChange={handleImageChange} />
-      {previewUrl && (
+    <>
+     <img src="/kumomo.png" alt="曇" className="kumo1"/>
+     <img src="/kumomo.png" alt="曇" className="kumo2"/>
+     <div className="parent">
+     <img src="/level2.png" alt="キャラクター" className="toraberun"/>
+     <img src="/fukidashi_bw03.png" alt="ふきだし" className="fukidashi"/>
+     <p className="toraberuntext">↑とらべるん</p>
+     <p className="fukidashitext">写真を<br/>送信してね🌼</p>
+     </div>
+      <div className="container">
+        <h1>--映え度判定--</h1>
+        <p>
+          旅行の思い出をとらべるんが採点します☁
+          <br />
+          100点はなまる💮を目指そう✨
+        </p>
+        <input type="file" accept="image/*" onChange={handleImageChange} />
+        {previewUrl && (
+          <div>
+            <img src={previewUrl} alt="preview" style={{ width: "300px" }} />
+          </div>
+        )}
         <div>
-          <img src={previewUrl} alt="preview" style={{ width: "300px" }} />
+          <button onClick={handleSubmit}>送信</button>
         </div>
-      )}
-
-      <button onClick={handleSubmit}>送信</button>
-    </div>
+      </div>
+      </>
   );
 }
