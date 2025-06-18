@@ -121,9 +121,6 @@ function Home() {
     >
       {/* <Header /> */}
       <h1>フェレットラベル</h1>
-      <Link to="/baedo">
-        <button>映え度をチェック！</button>
-      </Link>
       <input
         type="text"
         placeholder="地名を入力(例：東京駅)"
