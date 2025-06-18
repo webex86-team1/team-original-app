@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Baedoresult from "../components/baedoresult";
 import { storage } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
+import Header from "../components/header.jsx";
 export default function Baedo() {
   const [image, setImage] = useState("");
   const [previewUrl, setPreviewUrl] = useState("");
@@ -34,13 +34,16 @@ export default function Baedo() {
 
       console.log("アップロード成功！URL:", downloadURL);
 
-      const response = await fetch("https://baedoscore-z2oiicc62q-uc.a.run.app", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ imageUrl: downloadURL })
-      });
+      const response = await fetch(
+        "https://baedoscore-z2oiicc62q-uc.a.run.app",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ imageUrl: downloadURL }),
+        }
+      );
 
       const data = await response.text();
       console.log("AI Studioからのレスポンス:", data);
@@ -55,11 +58,12 @@ export default function Baedo() {
   };
 
   if (submitted && resultData) {
-    return <Baedoresult imageUrl={previewUrl} score={resultData}/>;
+    return <Baedoresult imageUrl={previewUrl} score={resultData} />;
   }
 
   return (
     <div>
+      <Header />
       <h1>映え度判定</h1>
       <p>写真を送信してね🌼</p>
 

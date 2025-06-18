@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-// import { useNavigate } from "react-router-dom";
-// import Header from "../components/header";
+import { useNavigate } from "@remix-run/react";
 import {
   APIProvider,
   Map,
@@ -16,9 +15,11 @@ import {
   getDocs,
   deleteDoc,
 } from "firebase/firestore";
+import Header from "../components/header.jsx";
 
 //住所と地図の中心の初期設定
 function Home() {
+  const navigate = useNavigate();
   const [center, setCenter] = useState({
     lat: 35.681236,
     lng: 139.767125,
@@ -119,7 +120,7 @@ function Home() {
       libraries={["places"]}
       onLoad={() => console.log("Maps API has loaded")}
     >
-      {/* <Header /> */}
+      <Header />
       <h1>フェレットラベル</h1>
       <input
         type="text"
@@ -156,10 +157,10 @@ function Home() {
               <button className="button" onClick={handleDelete}>
                 削除
               </button>
-              <button className="button" onClick={handleDelete}>
+              <button className="button" onClick={() => navigate("/postsView")}>
                 閲覧
               </button>
-              <button className="button" onClick={handleDelete}>
+              <button className="button" onClick={() => navigate("/post")}>
                 作成
               </button>
             </div>
