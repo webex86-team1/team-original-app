@@ -4,11 +4,15 @@ import { storage } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import "../styles/baedo.css";
 
+
+
 export default function Baedo() {
   const [image, setImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const [resultData, setResultData] = useState(""); // スコア＋コメント
+  const [resultData, setResultData] = useState("");
+  // 初期値falseで表示されない
+const [isLoading, setIsLoading] = useState(false);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -26,6 +30,7 @@ export default function Baedo() {
       alert("画像を選択してください");
       return;
     }
+    setIsLoading(true);
 
     try {
       const uniqueName = `${Date.now()}_${image.name}`;
@@ -47,7 +52,7 @@ export default function Baedo() {
       console.log("AI Studioからのレスポンス:", data);
 
       setResultData(data);
-      setPreviewUrl(downloadURL); // URLも結果に渡す
+      setPreviewUrl(downloadURL);
       setSubmitted(true);
     } catch (error) {
       console.error("エラー:", error);
@@ -79,11 +84,12 @@ export default function Baedo() {
         <input type="file" accept="image/*" onChange={handleImageChange} />
         {previewUrl && (
           <div>
-            <img src={previewUrl} alt="preview" style={{ width: "300px" }} />
+            <img src={previewUrl} alt="preview" style={{ width: "250px" }} />
           </div>
         )}
         <div>
           <button onClick={handleSubmit}>送信</button>
+          {isLoading && <p style={{ color: "gray" }}>採点中…⏳</p>}
         </div>
       </div>
       </>

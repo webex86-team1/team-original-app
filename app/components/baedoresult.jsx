@@ -4,7 +4,7 @@ export default function Baedoresult({ imageUrl,score }) {
   if (!imageUrl) {
     return (
       <div>
-        <h2>判定結果</h2>
+        <h1>判定結果</h1>
         <p>画像がありません</p>
       </div>
     );
