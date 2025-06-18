@@ -16,8 +16,6 @@ import {
   getDocs,
   deleteDoc,
 } from "firebase/firestore";
-// 削除するあとで
-import { Link } from "@remix-run/react";
 
 //住所と地図の中心の初期設定
 function Home() {
@@ -123,7 +121,6 @@ function Home() {
     >
       {/* <Header /> */}
       <h1>フェレットラベル</h1>
-      {/* 削除するあとで */}
       <Link to="/baedo">
         <button>映え度をチェック！</button>
       </Link>
