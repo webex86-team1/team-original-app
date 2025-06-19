@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { db, storage } from "../firebase";
 import {
   collection,
@@ -20,6 +20,7 @@ export default function PostList() {
   const [mainText, setMainTexts] = useState("");
   const [visitDate, setVisitDates] = useState("");
   const [user, setUser] = useState(null);
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     const auth = getAuth();
@@ -63,6 +64,7 @@ export default function PostList() {
     setPhotos(null);
     setMainTexts("");
     setVisitDates("");
+    fileInputRef.current.value = "";
     fetchPosts(); // 投稿リスト更新
   };
 
@@ -103,6 +105,7 @@ export default function PostList() {
           type="file"
           accept="image/jpeg,image/png"
           onChange={(e) => setPhotos(e.target.files[0])}
+          ref={fileInputRef}
         />
         <br />
         <label>本文：</label>
@@ -114,7 +117,7 @@ export default function PostList() {
         <br />
         <label>訪問時期：</label>
         <input
-          type="text"
+          type="date"
           value={visitDate}
           onChange={(e) => setVisitDates(e.target.value)}
         />
