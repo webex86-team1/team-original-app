@@ -64,29 +64,29 @@ button {
 .toraberun {
   position: absolute;
   width: 50%;
-  right: 5%;
-  bottom: 30%;
+  right: 0;
+  bottom: 20%;
   animation: fuwafuwa 1s ease-in-out infinite;
 }
 
 .fukidashi {
   position: absolute;
-  width: 40%;
+  width: 50%;
   right: 50%;
-  bottom: 20%;
+  bottom: 5%;
 }
 
 .toraberuntext {
   position: absolute;
-  right:15%;
-  bottom: 3%;
+  right:10%;
+  bottom: 0;
   font-size: 1rem;
 }
 
 .fukidashitext{
   position: absolute;
-  right: 53%;
-  bottom: 25%;
+  right: 56%;
+  bottom: 15%;
   font-size: 0.9rem;
 }
 
@@ -106,4 +106,4 @@ button {
   60% {
     transform: translateX(-10px);
   }
-}
+}*/

@@ -84,7 +84,7 @@ const [isLoading, setIsLoading] = useState(false);
         <input type="file" accept="image/*" onChange={handleImageChange} />
         {previewUrl && (
           <div>
-            <img src={previewUrl} alt="preview" style={{ width: "250px" }} />
+            <img src={previewUrl} alt="preview" style={{ width: "50%"}} />
           </div>
         )}
         <div>
