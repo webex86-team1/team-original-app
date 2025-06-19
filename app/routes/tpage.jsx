@@ -4,6 +4,7 @@ import { collection, getDocs } from "firebase/firestore";
 import Header from "../components/header.jsx";
 import PostForm from "../routes/gamen.jsx";
 import "../styles/auth/gamen.css";
+import "../styles/auth/tpage.css";
 
 export default function PostList() {
   const [post, setPosts] = useState([]);
@@ -30,19 +31,24 @@ export default function PostList() {
   return (
     <div>
       <Header />
-
+      <h1></h1>
       <h2>投稿一覧</h2>
+      <div id="allpost">
       {post.map((post) => (
         <div key={post.id}>
+          <p id="dotdot"></p>
           <h3>{post.title}</h3>
-          <p>満足度: {post.satisfaction} / 5</p>
-          <img src={post.photoURL} alt={post.title} width="200" />
-          <p>{post.mainText}</p>
-          <p>訪問時期: {post.visitDate}</p>
-          <p>投稿時間: {post.createdAt?.toDate().toLocaleString()}</p>
+          <p id="satisfyX">満足度:{post.satisfaction}/5</p>
+          <img id="image" src={post.photoURL} alt={post.title} width="300" />
+          <p id="maintextA">{post.mainText}</p>
+          <p id="visitday">{post.visitDate}に訪れました</p>
+          <p id="uploadday">{post.createdAt?.toDate().toLocaleString()}に投稿しました</p>
+          <div id="deletebutton">
           <button onClick={() => handleDeletePost(post.id)}>削除</button>
+          </div>
         </div>
       ))}
+      </div>
     </div>
   );
 }

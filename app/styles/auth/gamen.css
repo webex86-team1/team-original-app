@@ -1,3 +1,84 @@
 h1{
-    padding-top: 40px;
+    padding-top: 50px;
+}
+h2{
+    align-items: center;         
+    text-align:  center;  
+    height: 50px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif;
+}
+button{
+    color: #1b1b1a;
+    background-color: rgb(123, 177, 201);
+    border-radius: 200vh;
+    box-shadow: 0px 2px 0px #57799f;
+    transition: 0.3s;
+}
+.button:hover {
+  box-shadow: unset;
+  transform: translateY(4px);
+}
+#title{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top:0px;
+}
+
+#inputtitle{
+    width:80%;
+    height:25px;
+    align-items: center;
+    justify-content: center;
+    position: center;
+}
+#satisfy{
+    margin-left:120px;
+    display: flex;
+    justify-content: flex;
+     padding-top: 10px;
+    float:left;
+}
+#inputsatisfy{
+    display: flex;
+    height:15px;
+    padding-top: 10px;
+}
+#when{
+    padding-left: 150px;
+    display:flex;
+    justify-content: flex;
+    float:left;
+}
+#inputwhen{
+    width: 180px;
+    height: 15px;
+    padding-top: 25px;
+    float:;
+}
+.classA{
+    display:flex;
+    width:100%
+}
+#image{
+    display: flex;
+    padding-left: 150px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+#inputtext{
+    margin-top: 10px;
+    width:80%;
+    height:300px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 140px;
+}
+#toukoubotan{
+    position:right;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 150px; 
+    padding-top:15px;
 }
