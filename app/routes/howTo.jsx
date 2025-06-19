@@ -78,6 +78,13 @@ function howTo() {
             </li>
           </ul>
         </div>
+        <div class="container">
+         <img src="/tamago.png" alt="キラキラ" className="item"/>
+         < img src="/level2.png" alt="キラキラ" className="item"/>
+         <img src="/travel.png" alt="キラキラ" className="item"/>
+         <img src="/aaa.png" alt="キラキラ" className="item"/>
+         <img src="/hane.png" alt="キラキラ" className="item"/>
+        </div>
       </div>
     </>
   );
