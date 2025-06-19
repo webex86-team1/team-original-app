@@ -3,6 +3,7 @@ import Baedoresult from "../components/baedoresult";
 import { storage } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import "../styles/baedo.css";
+import Header from "../components/header";
 
 
 
