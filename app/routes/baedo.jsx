@@ -6,6 +6,7 @@ import "../styles/baedo.css";
 
 
 
+import Header from "../components/header.jsx";
 export default function Baedo() {
   const [image, setImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
@@ -40,13 +41,16 @@ const [isLoading, setIsLoading] = useState(false);
 
       console.log("アップロード成功！URL:", downloadURL);
 
-      const response = await fetch("https://baedoscore-z2oiicc62q-uc.a.run.app", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ imageUrl: downloadURL })
-      });
+      const response = await fetch(
+        "https://baedoscore-z2oiicc62q-uc.a.run.app",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ imageUrl: downloadURL }),
+        }
+      );
 
       const data = await response.text();
       console.log("AI Studioからのレスポンス:", data);
@@ -61,7 +65,7 @@ const [isLoading, setIsLoading] = useState(false);
   };
 
   if (submitted && resultData) {
-    return <Baedoresult imageUrl={previewUrl} score={resultData}/>;
+    return <Baedoresult imageUrl={previewUrl} score={resultData} />;
   }
 
   return (

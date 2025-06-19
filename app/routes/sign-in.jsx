@@ -13,7 +13,7 @@ export default function SignIn() {
     try {
       await signInWithPopup(auth, provider);
       alert("ログインに成功しました");
-      navigate("/home");
+      navigate("/map");
     } catch (error) {
       alert("ログインに失敗しました");
       console.log(error.message);
@@ -25,7 +25,7 @@ export default function SignIn() {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       alert("ログインに成功しました");
-      navigate("/home");
+      navigate("/map");
     } catch (error) {
       alert("ログインできませんでした");
     }
