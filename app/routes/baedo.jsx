@@ -5,9 +5,6 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import "../styles/baedo.css";
 import Header from "../components/header";
 
-
-
-import Header from "../components/header.jsx";
 export default function Baedo() {
   const [image, setImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
@@ -71,6 +68,7 @@ const [isLoading, setIsLoading] = useState(false);
 
   return (
     <>
+    <Header />
      <img src="/kumomo.png" alt="曇" className="kumo1"/>
      <img src="/kumomo.png" alt="曇" className="kumo2"/>
      <div className="parent">
