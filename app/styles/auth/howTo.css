@@ -2,7 +2,13 @@ Header {
   margin: 0, auto;
 }
 
-html,body {
+h1 {
+  margin-top: 72px;
+  padding: 24px, auto;
+}
+
+html,
+body {
   margin: 0;
   padding: 0;
   background-color: #c2eeff;
@@ -56,8 +62,9 @@ html,body {
 }
 
 .container {
-  display: flex;          /* 横並びにする */
-  justify-content: center;
+  margin-top: 32px;
+  display: flex; /* 横並びにする */
+  justify-content: space-around;
 }
 
 .item {
@@ -65,7 +72,7 @@ html,body {
   height: 15vh;
 }
 
-.contentsWrapper{
+.contentsWrapper {
   text-align: center;
 }
 

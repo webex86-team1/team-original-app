@@ -3,6 +3,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { Link, useNavigate } from "@remix-run/react";
 import { GoogleAuthProvider, signInWithPopup } from "../firebase";
+import "../styles/auth/sign-in.css";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -32,12 +33,12 @@ export default function SignIn() {
   };
 
   return (
-    <div className="sign-up-page">
-      <h1>タイトル</h1>
-      <h2>Hi,おかえり～</h2>
-      <img src="/eggTrip.png" alt="eggTrip" />
+    <div className="sign-in-page">
+      <h1>フェレットラベル</h1>
+      <h3>Hi,おかえり～</h3>
+      <img src="/planeEgg.png" alt="planeEgg" />
 
-      <div className="sign-up-form">
+      <div className="sign-in-form">
         <form onSubmit={handleSubmit}>
           {/* メールアドレス */}
           <div className="form-group">
@@ -63,11 +64,12 @@ export default function SignIn() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <button type="submit" className="sign-up-button">
+          <button className="btn" type="submit">
             ログイン
           </button>
         </form>
-        <button className="google-button" onClick={handleGoogleSignIn}>
+        <p>または</p>
+        <button className="btn" onClick={handleGoogleSignIn}>
           Googleでログイン
         </button>
         <Link to="/sign-up">新規登録はこちら</Link>
