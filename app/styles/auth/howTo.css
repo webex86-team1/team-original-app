@@ -2,6 +2,10 @@ Header {
   margin: 0, auto;
 }
 
+h1 {
+  margin-top: 60px;
+}
+
 .contentsWrapper {
   padding-top: 60px;
 }
