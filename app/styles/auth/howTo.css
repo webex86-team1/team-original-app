@@ -2,8 +2,16 @@ Header {
   margin: 0, auto;
 }
 
+html,body {
+  margin: 0;
+  padding: 0;
+  background-color: #c2eeff;
+  height: 100%;
+}
+
 .contentsWrapper {
   padding-top: 60px;
+  text-align: center;
 }
 
 .balloon2-right {
@@ -45,4 +53,23 @@ Header {
 .balloon2-right p {
   margin: 0;
   padding: 0;
+}
+
+.container {
+  display: flex;          /* 横並びにする */
+  justify-content: center;
+}
+
+.item {
+  width: 15vw;
+  height: 15vh;
+}
+
+.contentsWrapper{
+  text-align: center;
+}
+
+ul {
+  text-align: center;
+  list-style-position: inside;
 }
