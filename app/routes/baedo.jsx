@@ -4,7 +4,7 @@ import { storage } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Header from "../components/header.jsx";
 
-export default function Baedo() {
+export default function Baedo(){
   const [image, setImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -66,44 +66,17 @@ const [isLoading, setIsLoading] = useState(false);
   }
 
   return (
-<<<<<<< HEAD
     <div>
       <Header />
       <h1>映え度判定</h1>
       <p>写真を送信してね🌼</p>
 
       <input type="file" accept="image/*" onChange={handleImageChange} />
-      {previewUrl && (
-=======
-    <>
-    <Header />
-     <img src="/kumomo.png" alt="曇" className="kumo1"/>
-     <img src="/kumomo.png" alt="曇" className="kumo2"/>
-     <div className="parent">
-     <img src="/level2.png" alt="キャラクター" className="toraberun"/>
-     <img src="/fukidashi_bw03.png" alt="ふきだし" className="fukidashi"/>
-     <p className="toraberuntext">↑とらべるん</p>
-     <p className="fukidashitext">写真を<br/>送信してね🌼</p>
-     </div>
-      <div className="container">
-        <h1>--映え度判定--</h1>
-        <p>
-          旅行の思い出をとらべるんが採点します☁
-          <br />
-          100点はなまる💮を目指そう✨
-        </p>
-        <input type="file" accept="image/*" onChange={handleImageChange} />
-        {previewUrl && (
-          <div>
-            <img src={previewUrl} alt="preview" style={{ width: "50%"}} />
-          </div>
-        )}
->>>>>>> b23a7fc74ed4d26e2d0a83adfe73bcbc1c4244b5
+      previewUrl && 
         <div>
           <button onClick={handleSubmit}>送信</button>
           {isLoading && <p style={{ color: "gray" }}>採点中…⏳</p>}
         </div>
-      </div>
-      </>
-  );
+     </div>
+   );
 }

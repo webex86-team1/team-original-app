@@ -16,7 +16,7 @@ export default function PostList() {
   //   const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   //   setPosts(data);
   // };
-
+  
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
