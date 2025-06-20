@@ -14,7 +14,7 @@ export default function SignIn() {
     try {
       await signInWithPopup(auth, provider);
       alert("ログインに成功しました");
-      navigate("/map");
+      navigate("/howTo");
     } catch (error) {
       alert("ログインに失敗しました");
       console.log(error.message);
@@ -25,8 +25,13 @@ export default function SignIn() {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      if (!email || !password || password.length < 6) {
+        alert("メールアドレスと6文字以上のパスワードを入力してください。");
+        return;
+      }
+
       alert("ログインに成功しました");
-      navigate("/map");
+      navigate("/howTo");
     } catch (error) {
       alert("ログインできませんでした");
     }
