@@ -6,6 +6,8 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
+import Header from "./components/header"; 
+
 export function Layout({ children }) {
   return (
     <html lang="en">
@@ -16,7 +18,10 @@ export function Layout({ children }) {
         <Links />
       </head>
       <body>
+      <Header />
+      <main>
         {children}
+        </main>
         <ScrollRestoration />
         <Scripts />
       </body>
