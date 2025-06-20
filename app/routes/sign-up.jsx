@@ -3,6 +3,7 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { Link, useNavigate } from "@remix-run/react";
+import "../styles/auth/sign-up.css";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -23,8 +24,8 @@ export default function SignUp() {
   return (
     <div className="sign-up-page">
       <h1>フェレットラベル</h1>
-      <h2>Hi,はじめまして？</h2>
-      <img src="/eggTrip.png" alt="eggTrip"></img>
+      <h3>Hi,はじめまして？</h3>
+      <img src="/planeEgg.png" alt="eggTrip"></img>
 
       <div className="sign-up-form">
         <form onSubmit={handleSubmit}>
@@ -52,7 +53,7 @@ export default function SignUp() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <button type="submit" className="sign-up-button">
+          <button className="btn" type="submit">
             新規登録
           </button>
         </form>

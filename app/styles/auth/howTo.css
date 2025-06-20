@@ -2,11 +2,13 @@ Header {
   margin: 0, auto;
 }
 
-html,body {
-  margin: 0;
-  padding: 0;
+h1 {
+  margin-top: 72px;
+  padding: 24px, auto;
+}
+
+* {
   background-color: #c2eeff;
-  height: 100%;
 }
 
 .contentsWrapper {
@@ -56,17 +58,14 @@ html,body {
 }
 
 .container {
-  display: flex;          /* 横並びにする */
-  justify-content: center;
+  margin-top: 32px;
+  display: flex; /* 横並びにする */
+  justify-content: space-around;
 }
 
 .item {
   width: 15vw;
   height: 15vh;
-}
-
-.contentsWrapper{
-  text-align: center;
 }
 
 ul {
