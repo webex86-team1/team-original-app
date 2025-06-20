@@ -68,7 +68,6 @@ const [isLoading, setIsLoading] = useState(false);
 
   return (
     <>
-    {/* <Header /> */}
      <img src="/kumomo.png" alt="曇" className="kumo1"/>
      <img src="/kumomo.png" alt="曇" className="kumo2"/>
      <div className="parent">

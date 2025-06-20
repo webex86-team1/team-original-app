@@ -31,7 +31,6 @@ header {
     cursor: pointer;
   }
   main {
-    padding-top: 5vh; /* headerの高さに合わせて調整 */
-    background-color: #c2eeff;
+    padding-top: 2vh; headerの高さに合わせて調整
+    /* background-color: #c2eeff; */
   }
-  

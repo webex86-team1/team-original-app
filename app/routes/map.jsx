@@ -130,7 +130,6 @@ function Home() {
       libraries={["places"]}
       onLoad={() => console.log("Maps API has loaded")}
     >
-      {/* <Header /> */}
       <h1>フェレットラベル</h1>
       <input
         type="text"

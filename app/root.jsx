@@ -4,11 +4,14 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from "@remix-run/react";
 
 import Header from "./components/header"; 
 
 export function Layout({ children }) {
+  const location = useLocation();
+  const noHeaderPaths = ["/sign-in", "/sign-up"];
   return (
     <html lang="en">
       <head>
@@ -18,7 +21,7 @@ export function Layout({ children }) {
         <Links />
       </head>
       <body>
-      <Header />
+      {!noHeaderPaths.includes(location.pathname) && <Header />}
       <main>
         {children}
         </main>

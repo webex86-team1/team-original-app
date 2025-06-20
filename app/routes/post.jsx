@@ -9,7 +9,7 @@ import {
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { format } from "date-fns";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Header from "../components/header.jsx";
+// import Header from "../components/header.jsx";
 import "../styles/auth/gamen.css";
 
 export default function PostList() {
@@ -81,7 +81,6 @@ export default function PostList() {
 
   return (
     <div>
-      <Header />
       <div className="contentsWrapper">
         <h2>投稿する</h2>
         <label>タイトル：</label>
