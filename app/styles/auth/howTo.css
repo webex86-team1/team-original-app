@@ -2,17 +2,16 @@ Header {
   margin: 0, auto;
 }
 
-h1 {
-  margin-top: 72px;
-  padding: 24px, auto;
-}
-
-* {
+html,
+body {
+  margin: 0;
+  padding: 0;
   background-color: #c2eeff;
+  height: 100%;
 }
 
 .contentsWrapper {
-  padding-top: 60px;
+  padding-top: 30px;
   text-align: center;
 }
 
@@ -66,6 +65,10 @@ h1 {
 .item {
   width: 15vw;
   height: 15vh;
+}
+
+.contentsWrapper {
+  text-align: center;
 }
 
 ul {
