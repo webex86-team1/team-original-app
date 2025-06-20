@@ -1,10 +1,9 @@
-import Header from "../components/header";
+
 import "../styles/auth/howTo.css";
 
 function howTo() {
   return (
     <>
-      <Header />
       <div className="contentsWrapper">
         <h1>～アプリの使い方～</h1>
         <p>自分だけのオリジナル旅行マップを作ろう！</p>

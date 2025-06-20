@@ -18,7 +18,6 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { query, where } from "firebase/firestore";
-import Header from "../components/header.jsx";
 
 //住所と地図の中心の初期設定
 function Home() {
@@ -130,7 +129,6 @@ function Home() {
       libraries={["places"]}
       onLoad={() => console.log("Maps API has loaded")}
     >
-      <Header />
       <h1>フェレットラベル</h1>
       <input
         type="text"

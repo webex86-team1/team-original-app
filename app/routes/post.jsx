@@ -8,7 +8,6 @@ import {
 } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { format } from "date-fns";
-import Header from "../components/header.jsx";
 import "../styles/auth/post.css";
 
 export default function PostList() {
@@ -62,7 +61,7 @@ export default function PostList() {
 
   return (
     <div>
-      <Header />
+
       <h1></h1>
       <h2>↓投稿はここから↓</h2>
       <div id="title">
