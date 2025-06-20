@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef } from "react";
-// import { useNavigate } from "react-router-dom";
-import Header from "../components/header";
+import { useNavigate } from "react-router-dom";
 import {
   APIProvider,
   Map,
   AdvancedMarker,
   InfoWindow,
 } from "@vis.gl/react-google-maps";
+
+import { getAuth } from "firebase/auth";
 
 import { db } from "../firebase";
 import {
@@ -16,9 +17,14 @@ import {
   getDocs,
   deleteDoc,
 } from "firebase/firestore";
+import { query, where } from "firebase/firestore";
+import Header from "../components/header.jsx";
 
 //住所と地図の中心の初期設定
 function Home() {
+  // const auth = getAuth();
+  // const user = auth.currentUser;
+  const navigate = useNavigate();
   const [center, setCenter] = useState({
     lat: 35.681236,
     lng: 139.767125,
@@ -31,10 +37,14 @@ function Home() {
   //クリックしたマーカー
   const [selectedMarker, setSelectedMarker] = useState(null);
   const mapRef = useRef(null);
+  const auth = getAuth();
+  const user = auth.currentUser;
   //画面表示後、Firestoreに保存されたマーカーを表示する非同期処理
   useEffect(() => {
     const fetchMarkers = async () => {
-      const querySnapShot = await getDocs(collection(db, "markers"));
+      if (!user) return;
+      const q = query(collection(db, "markers"), where("uid", "==", user.uid));
+      const querySnapShot = await getDocs(q);
       const markers = querySnapShot.docs.map((doc) => ({
         id: doc.id,
         location: doc.data().location,
@@ -42,7 +52,7 @@ function Home() {
       setClickPoints(markers);
     };
     fetchMarkers();
-  }, []);
+  }, [user]);
 
   const handleGeocode = () => {
     console.log("address:", address);
@@ -84,6 +94,7 @@ function Home() {
     // クリックした地点のオブジェクト作成
     const newPoint = {
       location: { lat, lng },
+      uid: user.uid,
     };
     // markersという名前でnewPointの情報をfirebaseに保存する(FirestoreによってIDは自動的に生成される)
     const docRef = await addDoc(collection(db, "markers"), newPoint);
@@ -156,10 +167,10 @@ function Home() {
               <button className="button" onClick={handleDelete}>
                 削除
               </button>
-              <button className="button" onClick={handleDelete}>
+              <button className="button" onClick={() => navigate("/postsView")}>
                 閲覧
               </button>
-              <button className="button" onClick={handleDelete}>
+              <button className="button" onClick={() => navigate("/post")}>
                 作成
               </button>
             </div>

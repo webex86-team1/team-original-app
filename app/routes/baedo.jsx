@@ -5,10 +5,12 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Header from "../components/header.jsx";
 
 export default function Baedo() {
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const [resultData, setResultData] = useState(""); // スコア＋コメント
+  const [resultData, setResultData] = useState("");
+  // 初期値falseで表示されない
+const [isLoading, setIsLoading] = useState(false);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -26,6 +28,7 @@ export default function Baedo() {
       alert("画像を選択してください");
       return;
     }
+    setIsLoading(true);
 
     try {
       const uniqueName = `${Date.now()}_${image.name}`;
@@ -35,19 +38,22 @@ export default function Baedo() {
 
       console.log("アップロード成功！URL:", downloadURL);
 
-      const response = await fetch("https://baedoscore-z2oiicc62q-uc.a.run.app", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ imageUrl: downloadURL })
-      });
+      const response = await fetch(
+        "https://baedoscore-z2oiicc62q-uc.a.run.app",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ imageUrl: downloadURL }),
+        }
+      );
 
       const data = await response.text();
       console.log("AI Studioからのレスポンス:", data);
 
       setResultData(data);
-      setPreviewUrl(downloadURL); // URLも結果に渡す
+      setPreviewUrl(downloadURL);
       setSubmitted(true);
     } catch (error) {
       console.error("エラー:", error);
@@ -56,10 +62,11 @@ export default function Baedo() {
   };
 
   if (submitted && resultData) {
-    return <Baedoresult imageUrl={previewUrl} score={resultData}/>;
+    return <Baedoresult imageUrl={previewUrl} score={resultData} />;
   }
 
   return (
+<<<<<<< HEAD
     <div>
       <Header />
       <h1>映え度判定</h1>
@@ -67,12 +74,36 @@ export default function Baedo() {
 
       <input type="file" accept="image/*" onChange={handleImageChange} />
       {previewUrl && (
+=======
+    <>
+    <Header />
+     <img src="/kumomo.png" alt="曇" className="kumo1"/>
+     <img src="/kumomo.png" alt="曇" className="kumo2"/>
+     <div className="parent">
+     <img src="/level2.png" alt="キャラクター" className="toraberun"/>
+     <img src="/fukidashi_bw03.png" alt="ふきだし" className="fukidashi"/>
+     <p className="toraberuntext">↑とらべるん</p>
+     <p className="fukidashitext">写真を<br/>送信してね🌼</p>
+     </div>
+      <div className="container">
+        <h1>--映え度判定--</h1>
+        <p>
+          旅行の思い出をとらべるんが採点します☁
+          <br />
+          100点はなまる💮を目指そう✨
+        </p>
+        <input type="file" accept="image/*" onChange={handleImageChange} />
+        {previewUrl && (
+          <div>
+            <img src={previewUrl} alt="preview" style={{ width: "50%"}} />
+          </div>
+        )}
+>>>>>>> b23a7fc74ed4d26e2d0a83adfe73bcbc1c4244b5
         <div>
-          <img src={previewUrl} alt="preview" style={{ width: "300px" }} />
+          <button onClick={handleSubmit}>送信</button>
+          {isLoading && <p style={{ color: "gray" }}>採点中…⏳</p>}
         </div>
-      )}
-
-      <button onClick={handleSubmit}>送信</button>
-    </div>
+      </div>
+      </>
   );
 }

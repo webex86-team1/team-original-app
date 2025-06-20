@@ -6,6 +6,8 @@ header{
     height: 20px;
     margin: 5px;
     background-color: #733d0f;
+    display: flex;
+    
 }
 nav{
     background-color: rgb(226, 226, 237);

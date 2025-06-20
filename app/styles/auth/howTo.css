@@ -1,0 +1,75 @@
+Header {
+  margin: 0, auto;
+}
+
+html,body {
+  margin: 0;
+  padding: 0;
+  background-color: #c2eeff;
+  height: 100%;
+}
+
+.contentsWrapper {
+  padding-top: 60px;
+  text-align: center;
+}
+
+.balloon2-right {
+  position: relative;
+  display: inline-block;
+  margin: 1.5em 15px 1.5em 0;
+  padding: 7px 10px;
+  min-width: 120px;
+  max-width: 100%;
+  color: #555;
+  font-size: 16px;
+  background: #fff;
+  border: solid 3px #555;
+  box-sizing: border-box;
+}
+
+.balloon2-right:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -24px;
+  margin-top: -12px;
+  border: 12px solid transparent;
+  border-left: 12px solid #fff;
+  z-index: 2;
+}
+
+.balloon2-right:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -30px;
+  margin-top: -14px;
+  border: 14px solid transparent;
+  border-left: 14px solid #555;
+  z-index: 1;
+}
+
+.balloon2-right p {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;          /* 横並びにする */
+  justify-content: center;
+}
+
+.item {
+  width: 15vw;
+  height: 15vh;
+}
+
+.contentsWrapper{
+  text-align: center;
+}
+
+ul {
+  text-align: center;
+  list-style-position: inside;
+}
