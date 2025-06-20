@@ -1,0 +1,57 @@
+h1{
+    padding-top: 50px;
+}
+h2{
+    text-align:center;
+}
+h3{
+    text-align:left;
+    padding-top: 5px;
+    padding-left: 120px;
+
+}
+#dotdot{
+    border-bottom: dotted;
+    width:200vh;
+}
+#image{
+    position:left;
+    padding-left: 120px;
+    display: flex;
+    align-items: center; 
+}
+#satisfyX{
+    width: 120px;
+    position:left;
+    padding-left: 120px;
+    display: flex;
+    align-items: center; 
+}
+#allpost{
+    margin-bottom:20px;
+}
+#deletebutton{
+    position:right;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 150px; 
+    padding-top:15px;
+}
+#maintextA{
+    padding-left: 120px;
+    width: 80%;
+}
+#visitday{
+    padding-left: 120px;
+    width: 500px;
+    color: #090909;
+    opacity: 0.4;
+    font-size: small;
+}
+#uploadday{
+    padding-left: 120px;
+    width: 500px;
+    color: #090909;
+    opacity: 0.4;
+    font-size: small;
+}

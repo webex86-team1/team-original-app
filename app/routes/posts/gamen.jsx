@@ -1,4 +1,4 @@
-
+import "../styles/auth/header.css";
 import { useEffect, useState } from "react";
 import { db, storage } from "../../firebase";
 import {
@@ -74,6 +74,7 @@ export default function PostList() {
       <label>タイトル：</label>
       <input
         type="text"
+        className="title"
         value={title}
         onChange={(e) => setTitles(e.target.value)}
       />
@@ -90,6 +91,7 @@ export default function PostList() {
       <label>写真：</label>
       <input
         type="file"
+        multiple
         accept="image/jpeg,image/png"
         onChange={(e) => setPhotos(e.target.files[0])}
       />

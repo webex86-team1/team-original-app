@@ -11,7 +11,7 @@ export default function Baedo() {
   const [submitted, setSubmitted] = useState(false);
   const [resultData, setResultData] = useState("");
   // 初期値falseで表示されない
-const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -68,15 +68,19 @@ const [isLoading, setIsLoading] = useState(false);
 
   return (
     <>
-    <Header />
-     <img src="/kumomo.png" alt="曇" className="kumo1"/>
-     <img src="/kumomo.png" alt="曇" className="kumo2"/>
-     <div className="parent">
-     <img src="/level2.png" alt="キャラクター" className="toraberun"/>
-     <img src="/fukidashi_bw03.png" alt="ふきだし" className="fukidashi"/>
-     <p className="toraberuntext">↑とらべるん</p>
-     <p className="fukidashitext">写真を<br/>送信してね🌼</p>
-     </div>
+      <Header />
+      <img src="/kumomo.png" alt="曇" className="kumo1" />
+      <img src="/kumomo.png" alt="曇" className="kumo2" />
+      <div className="parent">
+        <img src="/level2.png" alt="キャラクター" className="toraberun" />
+        <img src="/fukidashi_bw03.png" alt="ふきだし" className="fukidashi" />
+        <p className="toraberuntext">↑とらべるん</p>
+        <p className="fukidashitext">
+          写真を
+          <br />
+          送信してね🌼
+        </p>
+      </div>
       <div className="container">
         <h1>--映え度判定--</h1>
         <p>
@@ -87,7 +91,7 @@ const [isLoading, setIsLoading] = useState(false);
         <input type="file" accept="image/*" onChange={handleImageChange} />
         {previewUrl && (
           <div>
-            <img src={previewUrl} alt="preview" style={{ width: "50%"}} />
+            <img src={previewUrl} alt="preview" style={{ width: "50%" }} />
           </div>
         )}
         <div>
@@ -95,6 +99,6 @@ const [isLoading, setIsLoading] = useState(false);
           {isLoading && <p style={{ color: "gray" }}>採点中…⏳</p>}
         </div>
       </div>
-      </>
+    </>
   );
 }
