@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Header from "../components/header.jsx";
+
 // import PostForm from "../routes/gamen.jsx";
 import "../styles/auth/postsView.css";
 
@@ -50,7 +50,6 @@ export default function PostList() {
 
   return (
     <div>
-      <Header />
       <h1></h1>
       <h2>投稿一覧</h2>
       <div id="allpost">

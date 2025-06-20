@@ -7,11 +7,11 @@ import {
   useLocation,
 } from "@remix-run/react";
 
-import Header from "./components/header"; 
+import Header from "./components/header";
 
 export function Layout({ children }) {
   const location = useLocation();
-  const noHeaderPaths = ["/sign-in", "/sign-up"];
+  const noHeaderPaths = ["/sign-in", "/sign-up", "/"];
   return (
     <html lang="en">
       <head>
@@ -21,10 +21,8 @@ export function Layout({ children }) {
         <Links />
       </head>
       <body>
-      {!noHeaderPaths.includes(location.pathname) && <Header />}
-      <main>
-        {children}
-        </main>
+        {!noHeaderPaths.includes(location.pathname) && <Header />}
+        <main>{children}</main>
         <ScrollRestoration />
         <Scripts />
       </body>

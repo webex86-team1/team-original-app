@@ -3,7 +3,6 @@ import Baedoresult from "../components/baedoresult";
 import { storage } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import "../styles/baedo.css";
-import Header from "../components/header";
 
 export default function Baedo() {
   const [image, setImage] = useState(null);
@@ -68,7 +67,7 @@ export default function Baedo() {
 
   return (
     <>
-      <Header />
+
       <img src="/kumomo.png" alt="曇" className="kumo1" />
       <img src="/kumomo.png" alt="曇" className="kumo2" />
       <div className="parent">
