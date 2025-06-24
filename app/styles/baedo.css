@@ -5,6 +5,10 @@ html,body {
   height: 100%;
 }
 
+.zentai{
+  min-height: 100vh;
+  position: relative;
+}
 .container{
   position: absolute;
   text-align: center;
@@ -51,12 +55,11 @@ button {
   right: 0;
 }
 
-/* ✅ 右下に固定（全体の親） */
 .parent{
-  position: fixed;
-  right: 10%;
+  position: absolute;
   bottom: 0;
-  width: 300px;   /* 必要に応じて調整 */
+  right: 0;
+  width: 300px;
   height: 200px;
 }
 

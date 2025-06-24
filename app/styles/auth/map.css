@@ -1,3 +1,46 @@
-* {
+html,body {
+  margin: 0;
+  padding: 0;
   background-color: #c2eeff;
+  height: 100%;
+}
+
+.mapzentai {
+  margin-top: 50px;
+  margin-bottom: 0;
+  min-height: 100vh;
+}
+
+.search-button {
+  padding: 12px 24px;
+  font-size: 18px;
+  border-radius: 12px;
+  background-color: #4aa6ff;
+  color: white;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.search-button:hover {
+  transform: scale(1.05);
+}
+
+.address-input {
+  padding: 12px;
+  font-size: 16px;
+  width: 300px;
+  margin-right: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center; /* 横中央揃え */
+  align-items: center;     /* 縦中央揃え（必要に応じて） */
+  gap: 10px;               /* 入力とボタンの間の余白 */
+  margin: 20px 0;
 }

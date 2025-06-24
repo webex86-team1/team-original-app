@@ -60,9 +60,7 @@ export default function PostList() {
   }, []);
 
   return (
-    <div>
-
-      <h1></h1>
+    <div className="postzentai">
       <h2>↓投稿はここから↓</h2>
       <div id="title">
         <input
