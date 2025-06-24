@@ -66,8 +66,7 @@ export default function Baedo() {
   }
 
   return (
-    <>
-
+    <div className ="zentai">
       <img src="/kumomo.png" alt="曇" className="kumo1" />
       <img src="/kumomo.png" alt="曇" className="kumo2" />
       <div className="parent">
@@ -98,6 +97,6 @@ export default function Baedo() {
           {isLoading && <p style={{ color: "gray" }}>採点中…⏳</p>}
         </div>
       </div>
-    </>
+    </div>
   );
 }

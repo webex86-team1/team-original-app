@@ -8,6 +8,7 @@ import {
 } from "@remix-run/react";
 
 import Header from "./components/header";
+import Footer from "./components/footer";
 
 export function Layout({ children }) {
   const location = useLocation();
@@ -23,6 +24,7 @@ export function Layout({ children }) {
       <body>
         {!noHeaderPaths.includes(location.pathname) && <Header />}
         <main>{children}</main>
+        {!noHeaderPaths.includes(location.pathname) && <Footer />}
         <ScrollRestoration />
         <Scripts />
       </body>
