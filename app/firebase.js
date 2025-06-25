@@ -23,7 +23,7 @@ if (getApps().length === 0) {
   app = getApp();
 }
 // Firestoreを読み込み、db(databaseの略)として export
-const db = getFirestore(app, "ferret-database");
+const db = getFirestore(app, "posts");
 const auth = getAuth(app);
 const storage = getStorage(app);
 
