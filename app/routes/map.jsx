@@ -143,7 +143,7 @@ function Home() {
       <button onClick={handleGeocode} className="search-button">検索</button>
       </div>
       <Map
-        style={{ height: "100vh", width: "100vw" }}
+        style={{ height: "100vh" }}
         defaultZoom={defaultZoom}
         defaultCenter={center}
         mapId="b284e80cecc7aeaae7fd7fe9"

@@ -10,10 +10,9 @@ body {
   margin: 50px auto 6px;
   max-width: 700px;
   padding: 20px;
-  border-radius: 20px;
 }
 
-h2 {
+.form-title{
   text-align: center;
   height: 50px;
   font-size: 1.5rem;
@@ -87,7 +86,7 @@ h2 {
   padding: 10px 40px;
 }
 
-button {
+.tb {
   padding: 10px 25px;
   background-color: rgb(123, 177, 201);
   color: #1b1b1a;

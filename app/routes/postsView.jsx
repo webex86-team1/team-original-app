@@ -50,7 +50,7 @@ export default function PostList() {
 
   return (
     <div className="postviewszentai">
-      <h2>投稿一覧</h2>
+      <h2 className="postview-title">投稿一覧</h2>
       <div id="allpost">
         {post.map((post) => (
           <div key={post.id}>
