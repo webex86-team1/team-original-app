@@ -1,57 +1,85 @@
-h1{
-    padding-top: 50px;
-}
-h2{
-    text-align:center;
-}
-h3{
-    text-align:left;
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif;
+    background-color: #c2eeff;
+  }
+
+.postviewszentai {
+    margin-top: 80px;
+    margin-bottom: 10px;
+    min-height: 100vh;
+  }
+
+.postview-title{
+    text-align: center;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    text-align: left;
     padding-top: 5px;
     padding-left: 120px;
+  }
 
-}
-#dotdot{
-    border-bottom: dotted;
-    width:200vh;
-}
-#image{
-    position:left;
+  #dotdot {
+    border-bottom: dotted 2px #ccc;
+    width: 80%;
+    margin: 20px auto;
+  }
+
+  #image {
+    padding-left: 120px;
+    display: block;
+    margin-top: 10px;
+  }
+  
+  #satisfyX {
     padding-left: 120px;
     display: flex;
-    align-items: center; 
-}
-#satisfyX{
-    width: 120px;
-    position:left;
-    padding-left: 120px;
-    display: flex;
-    align-items: center; 
-}
-#allpost{
-    margin-bottom:20px;
-}
-#deletebutton{
-    position:right;
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 150px; 
-    padding-top:15px;
-}
-#maintextA{
+    align-items: center;
+  }
+
+  #maintextA {
     padding-left: 120px;
     width: 80%;
-}
-#visitday{
+    margin-top: 10px;
+  }
+
+  #visitday, #uploadday {
     padding-left: 120px;
     width: 500px;
     color: #090909;
     opacity: 0.4;
     font-size: small;
-}
-#uploadday{
-    padding-left: 120px;
-    width: 500px;
-    color: #090909;
-    opacity: 0.4;
-    font-size: small;
-}
+  }
+
+  #allpost {
+    margin-bottom: 20px;
+  }
+
+  #deletebutton {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 150px;
+    padding-top: 15px;
+  }
+
+  button {
+    padding: 8px 16px;
+    background-color: rgb(123, 177, 201);
+    border-radius: 200vh;
+    border: none;
+    color: #1b1b1a;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0px 2px 0px #57799f;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    box-shadow: unset;
+    transform: translateY(4px);
+  }

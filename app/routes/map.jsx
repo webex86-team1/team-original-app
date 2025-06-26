@@ -18,6 +18,7 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { query, where } from "firebase/firestore";
+import "../styles/auth/map.css";
 
 //住所と地図の中心の初期設定
 function Home() {
@@ -129,16 +130,20 @@ function Home() {
       libraries={["places"]}
       onLoad={() => console.log("Maps API has loaded")}
     >
-      <h1>フェレットラベル</h1>
+      <div className="mapzentai">
+      <h1>旅行した場所にピンを打てるよ📍</h1>
+      <div className="search-container">
       <input
         type="text"
         placeholder="地名を入力(例：東京駅)"
         value={address}
         onChange={(e) => setAddress(e.target.value)}
+        className="address-input"
       />
-      <button onClick={handleGeocode}>検索</button>
+      <button onClick={handleGeocode} className="search-button">検索</button>
+      </div>
       <Map
-        style={{ height: "70vh", width: "80%" }}
+        style={{ height: "100vh" }}
         defaultZoom={defaultZoom}
         defaultCenter={center}
         mapId="b284e80cecc7aeaae7fd7fe9"
@@ -175,6 +180,7 @@ function Home() {
           </InfoWindow>
         )}
       </Map>
+    </div>
     </APIProvider>
   );
 }

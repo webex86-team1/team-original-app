@@ -85,9 +85,8 @@ export default function PostForm() {
   // }, []);
 
   return (
-    <div>
-      <h1></h1>
-      <h2>↓投稿はここから↓</h2>
+    <div className="postzentai">
+      <h2 className="form-title">↓投稿はここから↓</h2>
       <div id="title">
         <input
           id="inputtitle"
@@ -135,18 +134,19 @@ export default function PostForm() {
         <br />
       </div>
       <div id="maintext">
-        <label></label>
         <input
           id="inputtext"
           type="text"
-          placeholder="何をしたの？"
+          placeholder="旅行記録を書いてください。"
           value={mainText}
           onChange={(e) => setMainTexts(e.target.value)}
         />
         <br />
       </div>
       <div id="toukoubotan">
-        <button onClick={handleAddPost}>投稿する</button>
+        <button className="tb" onClick={handleAddPost}>
+          投稿する
+        </button>
       </div>
     </div>
   );
