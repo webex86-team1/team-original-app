@@ -34,7 +34,8 @@ export default function PostList() {
     const snapshot = await getDocs(collection(db, "posts"));
     const data = snapshot.docs
       .map((doc) => ({ id: doc.id, ...doc.data() }))
-      .filter((item) => item.uid === uid);
+      .filter((item) => item.uid === uid); //item は Firestore の posts コレクションの中の「1つのドキュメント」 を表しています。
+
     setPosts(data);
   };
 
