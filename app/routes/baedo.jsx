@@ -93,7 +93,7 @@ export default function Baedo() {
           </div>
         )}
         <div>
-          <button onClick={handleSubmit}>送信</button>
+          <button className="baedobutton" onClick={handleSubmit}>送信</button>
           {isLoading && <p style={{ color: "gray" }}>採点中…⏳</p>}
         </div>
       </div>

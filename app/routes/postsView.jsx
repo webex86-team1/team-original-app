@@ -65,7 +65,7 @@ export default function PostList() {
               {post.createdAt?.toDate().toLocaleString()}に投稿しました
             </p>
             <div id="deletebutton">
-              <button onClick={() => handleDeletePost(post.id)}>削除</button>
+              <button className="postviewbutton" onClick={() => handleDeletePost(post.id)}>削除</button>
             </div>
           </div>
         ))}

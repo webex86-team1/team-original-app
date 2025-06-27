@@ -28,7 +28,7 @@ export default function Baedoresult({ imageUrl,score }) {
   }
 
   return (
-    <div>
+    <div className="box">
       <img src="/kirakira.png" alt="キラキラ" className="kirakira"/>
       <img src="/kirakira.png" alt="キラキラ" className="kirakira1"/>
     <div className="parent animation">
