@@ -4,7 +4,9 @@ html,body {
   background-color: #c2eeff;
   height: 100%;
 }
-
+.box{
+  min-height: 94vh;
+}
 .fukidasinotext{
   position: absolute;
   right: 60%;

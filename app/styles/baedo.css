@@ -6,7 +6,7 @@ html,body {
 }
 
 .zentai{
-  min-height: 100vh;
+  min-height: 94vh;
   /* position: relative; */
 }
 .container{
@@ -27,7 +27,7 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 
-button {
+.baedobutton {
   margin-top: 12px;
   background-color: #ffffff;
   border-radius: 12px;
