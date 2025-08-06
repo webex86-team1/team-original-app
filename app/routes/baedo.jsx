@@ -84,7 +84,7 @@ export default function Baedo() {
         <p>
           旅行の思い出をとらべるんが採点します☁
           <br />
-          100点はなまる💮を目指そう✨
+          100点はなまる💮を目指しましょう✨
         </p>
         <input type="file" accept="image/*" onChange={handleImageChange} />
         {previewUrl && (
