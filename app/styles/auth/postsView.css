@@ -19,9 +19,8 @@ body {
   }
 
   h3 {
-    text-align: left;
     padding-top: 5px;
-    padding-left: 120px;
+    padding-left: 40%;
   }
 
   #dotdot {
@@ -56,9 +55,7 @@ body {
     font-size: small;
   }
 
-  #allpost {
-    margin-bottom: 20px;
-  }
+  
 
   #deletebutton {
     display: flex;
@@ -83,3 +80,35 @@ body {
     box-shadow: unset;
     transform: translateY(4px);
   }
+
+
+  #allpost {
+    margin-bottom: 2vh;
+    display: grid;
+    grid-template-columns: 30vw 30vw 30vw; /* 画面幅基準で3列 */
+    justify-content: space-around;         /* 左右の余白を均等 */
+    gap: 2vw;
+    padding: 2vw;
+  }
+  
+  /* 白カード */
+  #allpost > div {
+    background: white;
+    border-radius: 1vw;
+    padding: 2vw;
+    box-shadow: 0px 0.5vh 1vh rgba(0,0,0,0.1);
+  }
+  /* 白カード内での処理 */
+  #allpost > div h3 {
+    text-align: center;     /* タイトルを中央寄せ */
+    margin: 10px 0;
+    padding: 0;             /* 既存の左paddingを消す */
+  }
+  
+  #allpost > div img {
+    display: block;         /* インライン要素からブロック要素に変更 */
+    margin: 12px auto;      /* 横方向を中央寄せ */
+    max-width: 90%;         /* はみ出し防止 */
+    height: auto;
+  }
+  

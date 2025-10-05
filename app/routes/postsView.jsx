@@ -2,71 +2,74 @@ import { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-
-// import PostForm from "../routes/gamen.jsx";
 import "../styles/auth/postsView.css";
 
 export default function PostList() {
-  const [post, setPosts] = useState([]);
-  // const [user, setUser] = useState(null);
+  const [posts, setPosts] = useState([]);
+  const [user, setUser] = useState(null);
 
-  // const fetchPosts = async () => {
-  //   const snapshot = await getDocs(collection(db, "posts"));
-  //   const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-  //   setPosts(data);
-  // };
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log("ログインユーザーのUID", user.uid);
-        // setUser(user);
+        setUser(user);
         fetchPosts(user.uid);
       } else {
         alert("ログインが必要です。");
-        //ログインページに遷移する
       }
     });
     return () => unsubscribe();
   }, []);
 
   const fetchPosts = async (uid) => {
-    const snapshot = await getDocs(collection(db, "posts"));
-    const data = snapshot.docs
-      .map((doc) => ({ id: doc.id, ...doc.data() }))
-      .filter((item) => item.uid === uid); //item は Firestore の posts コレクションの中の「1つのドキュメント」 を表しています。
+    try {
+      const snapshot = await getDocs(collection(db, "posts"));
+      const data = snapshot.docs
+        .map((doc) => ({ id: doc.id, ...doc.data() }))
+        .filter((item) => item.uid === uid);
 
-    setPosts(data);
+      setPosts(data);
+    } catch (error) {
+      console.error("投稿データの取得中にエラーが発生しました:", error.message);
+    }
   };
 
   const handleDeletePost = async (id) => {
     const confirmeddelete = window.confirm("本当に削除しますか？");
     if (!confirmeddelete) return;
 
-    await deleteDoc(doc(db, "posts", id));
-    const newPosts = post.filter((post) => post.id !== id);
-    setPosts(newPosts);
-    alert("投稿が削除されました"); //（Firestoreからの削除処理は別途必要）
+    try {
+      await deleteDoc(doc(db, "posts", id));
+      const newPosts = posts.filter((post) => post.id !== id);
+      setPosts(newPosts);
+      alert("投稿が削除されました");
+    } catch (error) {
+      console.error("削除中にエラーが発生しました:", error.message);
+      alert("削除中にエラーが発生しました。");
+    }
   };
 
   return (
     <div className="postviewszentai">
       <h2 className="postview-title">投稿一覧</h2>
       <div id="allpost">
-        {post.map((post) => (
+        {posts.map((post) => (
           <div key={post.id}>
-            <p id="dotdot"></p>
             <h3>{post.title}</h3>
-            <p id="satisfyX">満足度:{post.satisfaction}/5</p>
-            <img id="image" src={post.photoURL} alt={post.title} width="300" />
-            <p id="maintextA">{post.mainText}</p>
-            <p id="visitday">{post.visitDate}に訪れました</p>
-            <p id="uploadday">
-              {post.createdAt?.toDate().toLocaleString()}に投稿しました
+            <p>⭐満足度: {post.satisfaction} / 5</p>
+            <img src={post.photoURL} alt={post.title} width="300" />
+            <p>{post.mainText}</p>
+            <p>
+              訪問日:{" "}
+              {post.visitDate}
             </p>
-            <div id="deletebutton">
-              <button className="postviewbutton" onClick={() => handleDeletePost(post.id)}>削除</button>
-            </div>
+            <p>
+              投稿日時:{" "}
+              {post.createdAt && post.createdAt.toDate
+                ? post.createdAt.toDate().toLocaleString()
+                : "不明"}
+            </p>
+            <button onClick={() => handleDeletePost(post.id)}>削除</button>
           </div>
         ))}
       </div>
