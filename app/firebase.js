@@ -22,8 +22,8 @@ if (getApps().length === 0) {
 } else {
   app = getApp();
 }
-// Firestoreを読み込み、db(databaseの略)として export
-const db = getFirestore(app, "posts");
+// 編集⭐　ここはfirebasedbのフォルダ名　コレクション名はpost.jsxに記載
+const db = getFirestore(app, "ferret-database");
 const auth = getAuth(app);
 const storage = getStorage(app);
 

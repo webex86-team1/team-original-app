@@ -2,91 +2,90 @@ import { useEffect, useState } from "react";
 import { db, storage } from "../firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { format } from "date-fns";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "../styles/auth/post.css";
 
 export default function PostForm() {
   const [user, setUser] = useState(null);
-  const [post, setPosts] = useState([]);
   const [title, setTitles] = useState("");
   const [satisfaction, setSatisfactions] = useState(3);
   const [photo, setPhotos] = useState(null);
   const [mainText, setMainTexts] = useState("");
   const [visitDate, setVisitDates] = useState("");
-  const uid = user?.uid;
-  // 以下と同じ意味
-  // let uid;
-  // if (user !== null && user !== undefined) {
-  //   uid = user.uid;
-  // } else {
-  //   uid = undefined;
-  // }
+  const [loading, setLoading] = useState(false);
 
+  const uid = user?.uid ?? null;
+
+  // 認証状態の監視（マウント時のみ）
   useEffect(() => {
     const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      // onAuthStateChanged()関数を実行し、戻り値（＝監視を解除する関数）をunsubscribeという定数に代入
-      if (user) {
-        setUser(user);
+    const unsubscribe = onAuthStateChanged(auth, (u) => {
+      if (u) {
+        setUser(u);
       } else {
         setUser(null);
         alert("ログインしてください");
       }
     });
     return () => unsubscribe();
-  });
+  }, []);
 
   const handleAddPost = async () => {
-    if (!user || !uid) {
-      alert("ログインしてから投稿してください");
-      return;
-    }
-    if (!title || !photo || !visitDate || !satisfaction || !mainText)
+    if (!user || !uid) return alert("ログインしてから投稿してください");
+    if (!title || !photo || !visitDate || !satisfaction || !mainText) {
       return alert("すべての項目を入力してください");
-    const confirmedupload = window.confirm("投稿しますか？");
-    if (!confirmedupload) return;
+    }
 
-    const photoRef = ref(storage, `images/${photo.name}`);
-    await uploadBytes(photoRef, photo);
-    console.log("await uploadBytes(photoRef, photo);");
-    const photoURL = await getDownloadURL(photoRef);
-    console.log("const photoURL = await getDownloadURL(photoRef);");
-    const date = new Date();
-    const formattedDate = format(date, "yyyy/MM/dd");
+    // 画像の軽いバリデーション
+    const okTypes = ["image/jpeg", "image/png"];
+    if (!okTypes.includes(photo.type)) {
+      return alert("JPEG または PNG の画像を選択してください");
+    }
+    const maxSizeMB = 5;
+    if (photo.size > maxSizeMB * 1024 * 1024) {
+      return alert(`画像サイズは ${maxSizeMB}MB 以下にしてください`);
+    }
 
-    await addDoc(collection(db, "posts"), {
-      uid: user.uid,
-      title,
-      satisfaction,
-      photoURL,
-      mainText,
-      visitDate,
-      createdAt: serverTimestamp(), //タイムスタンプを記録
-    });
+    if (!window.confirm("投稿しますか？")) return;
 
-    setTitles("");
-    setSatisfactions(3);
-    setPhotos(null);
-    setMainTexts("");
-    setVisitDates("");
-    // fetchPosts(); // 投稿リスト更新
-    alert("投稿が完了しました");
+    setLoading(true);
+    try {
+      // ユニークなファイル名にして上書きを避ける
+      const uniqueName = `${Date.now()}-${photo.name}`;
+      const photoRef = ref(storage, `image1/${uid}/${uniqueName}`);
+
+      await uploadBytes(photoRef, photo);
+      const photoURL = await getDownloadURL(photoRef);
+
+      await addDoc(collection(db, "posts"), {
+        uid,
+        title,
+        satisfaction,
+        photoURL, // Storage のダウンロードURL
+        mainText,
+        visitDate, // <input type="date"> の yyyy-mm-dd 文字列
+        createdAt: serverTimestamp(),
+      });
+
+      // フォーム初期化
+      setTitles("");
+      setSatisfactions(3);
+      setPhotos(null);
+      setMainTexts("");
+      setVisitDates("");
+      alert("投稿が完了しました");
+    } catch (e) {
+      console.error("投稿中にエラー:", e);
+      alert(`投稿中にエラーが発生しました: ${e.message}`);
+    } finally {
+      setLoading(false);
+    }
   };
-
-  // const fetchPosts = async () => {
-  //   const snapshot = await getDocs(collection(db, "posts"));
-  //   const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-  //   setPosts(data);
-  // };
-
-  // useEffect(() => {
-  //   fetchPosts();
-  // }, []);
 
   return (
     <div className="postzentai">
       <h2 className="form-title">↓投稿はここから↓</h2>
+
       <div id="title">
         <input
           id="inputtitle"
@@ -97,6 +96,7 @@ export default function PostForm() {
         />
         <br />
       </div>
+
       <div id="classs">
         <div id="satisfy">
           <p className="classA">満足度（１〜５）</p>
@@ -111,6 +111,7 @@ export default function PostForm() {
           />
           <br />
         </div>
+
         <div id="when">
           <p className="classA">訪問日</p>
           <input
@@ -123,16 +124,17 @@ export default function PostForm() {
           <br />
         </div>
       </div>
+
       <div id="image">
         <label>写真</label>
         <input
           type="file"
           accept="image/jpeg,image/png"
-          multiple
-          onChange={(e) => setPhotos(e.target.files[0])}
+          onChange={(e) => setPhotos(e.target.files?.[0] || null)}
         />
         <br />
       </div>
+
       <div id="maintext">
         <input
           id="inputtext"
@@ -143,9 +145,10 @@ export default function PostForm() {
         />
         <br />
       </div>
+
       <div id="toukoubotan">
-        <button className="tb" onClick={handleAddPost}>
-          投稿する
+        <button className="tb" onClick={handleAddPost} disabled={loading}>
+          {loading ? "投稿中..." : "投稿する"}
         </button>
       </div>
     </div>
